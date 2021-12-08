@@ -10,6 +10,10 @@ const useStyle = makeStyles({
     headingColor: {
         backgroundColor: deepPurple[400],
         color: "white"
+    },
+    addStuColor: {
+        backgroundColor: green[400],
+        color: "white"
     }
 })
 
@@ -23,7 +27,23 @@ const Home = () => {
             </Box>
             <Grid container >
                 <Grid item md={6} xs={12}>
-                    <h1>Add Students</h1>
+                    <Box textAlign="center" p={2} mb={2} className={clasess.addStuColor}>
+                        <Typography variant="h4">Add Student</Typography>
+                    </Box>
+                    <form noValidate>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} >
+                                <TextField autoComplete="stuname" name="stuname" variant="outlined" required fullWidth autoFocus id="stuname" Label="Name" />
+                            </Grid>
+                            <Grid item xs={12} >
+                                <TextField autoComplete="email" name="email" variant="outlined" required fullWidth autoFocus id="stuname" Label="Name" />
+                            </Grid>
+
+                        </Grid>
+                        <Box m={3}>
+                            <Button type="submit" variant="contained" color="primary" fullWidth>Add</Button>
+                        </Box>
+                    </form>
                 </Grid>
                 <Grid item md={6} xs={12}>
                     <h1>Student Lists</h1>
