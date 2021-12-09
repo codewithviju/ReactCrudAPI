@@ -31,16 +31,34 @@ const useStyle = makeStyles({
 const ListData = () => {
     const clasess = useStyle();
 
-    const [students, setStudents] = useState([]);
+    const [employees, setEmployees] = useState([]);
+
+    useEffect(() => {
+        getAllEmployees();
+    })
+
+    // To Get Data From API
+
+    async function getAllEmployees() {
+        try {
+            const employees = await axios.get("https://61b191eb3c954f001722aa01.mockapi.io/employees")
+            setEmployees(employees.data)
+        }
+        catch (error) {
+            console.log(`Something Wrong.. Look At ${error}`)
+        }
+    }
+
+
     return (
         <>
             <Box textAlign="center" p={2} className={clasess.stuListColor}>
-                <Typography variant="h4">Student List</Typography>
+                <Typography variant="h4">Employees List</Typography>
             </Box>
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
-                        <TableRow style={{ backgroundColor: "#616161" }} fullWidth>
+                        <TableRow style={{ backgroundColor: "#616161" }} fullwidth>
                             <TableCell align="center" className={clasess.tableHeadCell}>No</TableCell>
                             <TableCell align="center" className={clasess.tableHeadCell}>Name</TableCell>
                             <TableCell align="center" className={clasess.tableHeadCell}>Email</TableCell>
@@ -48,27 +66,37 @@ const ListData = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        <TableRow>
-                            <TableCell align="center">1</TableCell>
-                            <TableCell align="center">Vijay</TableCell>
-                            <TableCell align="center">vijay@gmail.com</TableCell>
-                            <TableCell align="center">
-                                <Tooltip title="Edit">
-                                    <IconButton>
-                                        <Link to="/edit/1">
-                                            <EditIcon color="primary"></EditIcon>
-                                        </Link>
-                                    </IconButton>
-                                </Tooltip>
-                                <Tooltip title="Delete">
-                                    <IconButton>
+                        {
+                            employees.map((employ, i) => {
+                                return (
+                                    <>
+                                        <TableRow key={i}>
+                                            <TableCell align="center">{i + 1}</TableCell>
+                                            <TableCell align="center">{employ.name}</TableCell>
+                                            <TableCell align="center">{employ.email}</TableCell>
+                                            <TableCell align="center">
+                                                <Tooltip title="Edit">
+                                                    <IconButton>
+                                                        <Link to="/edit/1">
+                                                            <EditIcon color="primary"></EditIcon>
+                                                        </Link>
+                                                    </IconButton>
+                                                </Tooltip>
+                                                <Tooltip title="Delete">
+                                                    <IconButton>
 
-                                        <DeleteIcon color="secondary"></DeleteIcon>
+                                                        <DeleteIcon color="secondary"></DeleteIcon>
 
-                                    </IconButton>
-                                </Tooltip>
-                            </TableCell>
-                        </TableRow>
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </TableCell>
+                                        </TableRow>
+
+                                    </>
+                                )
+                            })
+                        }
+
                     </TableBody>
                 </Table>
             </TableContainer>
