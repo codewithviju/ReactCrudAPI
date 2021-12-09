@@ -41,7 +41,7 @@ const ListData = () => {
 
     async function getAllEmployees() {
         try {
-            const employees = await axios.get("https://61b191eb3c954f001722aa01.mockapi.io/employees")
+            const employees = await axios.get("http://localhost:3333/employees")
             setEmployees(employees.data)
         }
         catch (error) {
@@ -72,8 +72,8 @@ const ListData = () => {
                                     <>
                                         <TableRow key={i}>
                                             <TableCell align="center">{i + 1}</TableCell>
-                                            <TableCell align="center">{employ.name}</TableCell>
-                                            <TableCell align="center">{employ.email}</TableCell>
+                                            <TableCell align="center">{employ.empname}</TableCell>
+                                            <TableCell align="center">{employ.empemail}</TableCell>
                                             <TableCell align="center">
                                                 <Tooltip title="Edit">
                                                     <IconButton>

@@ -34,7 +34,7 @@ const Home = () => {
     // Insert Employees With API
 
     const [employee, setEmployee] = useState({
-        name: "",
+        empname: "",
         email: ""
     });
 
@@ -47,7 +47,6 @@ const Home = () => {
             [e.target.name]: e.target.value
         })
 
-        console.log(employee)
 
     }
 
@@ -57,7 +56,7 @@ const Home = () => {
         e.preventDefault();
 
         try {
-            await axios.post(`https://61b191eb3c954f001722aa01.mockapi.io/employees`, employee)
+            await axios.post(`http://localhost:3333/employees`, employee)
 
         }
         catch (error) {
@@ -78,10 +77,10 @@ const Home = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12} >
 
-                                <TextField label="Name" id="Name" required autoFocus name="Name" autoComplete="Name" fullWidth onChange={e => GetDatafromField(e)} />
+                                <TextField label="Name" id="Name" required autoFocus name="empname" autoComplete="Name" fullWidth onChange={e => GetDatafromField(e)} />
                             </Grid>
                             <Grid item xs={12} >
-                                <TextField fullwidth label="Email" id="Email" required autoFocus name="Email" autoComplete="Email" fullWidth onChange={e => GetDatafromField(e)} />
+                                <TextField fullwidth label="Email" id="Email" required autoFocus name="empemail" autoComplete="Email" fullWidth onChange={e => GetDatafromField(e)} />
                             </Grid>
 
                         </Grid>
